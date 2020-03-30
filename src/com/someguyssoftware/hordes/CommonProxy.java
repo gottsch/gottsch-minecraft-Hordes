@@ -5,7 +5,7 @@ package com.someguyssoftware.hordes;
 
 /**
  * 
- * @author Mark Gottschling on Oct 13, 2014
+ * @author Mark Gottschling on May 20, 2015
  *
  */
 public class CommonProxy {
