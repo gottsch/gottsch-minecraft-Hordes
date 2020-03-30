@@ -1,0 +1,94 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+        maven {
+            name = "sonatype"
+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+    }
+}
+
+
+apply plugin: 'forge'
+
+version = "1.7.10-1.0"
+group= "com.sgs.hores" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "Hordes"
+
+minecraft {
+    version = "1.7.10-10.13.0.1180"
+    assetDir = "eclipse/assets"
+}
+
+//Optional: change the project structure
+sourceSets.main{
+    java{
+srcDirs 'src'//set the source folder as the /src subfolder
+}
+    resources{
+srcDirs 'src/resources'//set the resources folder as the /resources subfolder
+}
+}
+
+dependencies {
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
+    compile files('libs/jackson-core-2.4.2.jar')
+    compile files('libs/jackson-annotations-2.4.0.jar')
+    compile files('libs/jackson-databind-2.4.2.jar')
+     compile files('libs/plans-format-2.0.jar') 
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
+}
+
+jar {
+	//    from ({configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } })
+	
+	// for PROD only
+//	from ({configurations.compile.collect { zipTree('libs/plans-format-2.0.jar') } })
+//	from ({configurations.compile.collect { zipTree('libs/jackson-annotations-2.4.0.jar') } })
+//	from ({configurations.compile.collect { zipTree('libs/jackson-core-2.4.2.jar') } })
+//	from ({configurations.compile.collect { zipTree('libs/jackson-databind-2.4.2.jar') } })
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'C:/Users/Mark/AppData/Roaming/.minecraft-1.7.10/data/.minecraft/mods/1.7.10'
+       }
+    }
+}
+processResources
+{
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
