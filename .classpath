@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/ModCommonLibs/libs/guava-17.0.jar"/>
+	<classpathentry kind="lib" path="/ModCommonLibs/libs/jackson-annotations-2.4.0.jar"/>
+	<classpathentry kind="lib" path="/ModCommonLibs/libs/jackson-core-2.4.2.jar"/>
+	<classpathentry kind="lib" path="/ModCommonLibs/libs/jackson-databind-2.4.2.jar"/>
+	<classpathentry kind="lib" path="/ModCommonLibs/libs/jackson-datatype-guava-2.0.3.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/forge-1.12.2-2768"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/GottschCore1.12.2"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
